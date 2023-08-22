@@ -35,7 +35,7 @@ const SimulaCredito = ({ cuotaInitial, pieInitial, tasa, cuotaMin, cuotaMax, pie
   const validaMonto = (valorCalculado) => {
 
     if (pie < valorCalculado*0.2 || pie > valorCalculado*0.5) {
-      setAlert('Monto no válido');
+      setAlert('El pie debe estar entre el 20% y 50% del monto total');
     } else {
       setAlert('');
     }
@@ -69,6 +69,10 @@ const SimulaCredito = ({ cuotaInitial, pieInitial, tasa, cuotaMin, cuotaMax, pie
 
 
   return (
+  <>
+    <section>
+      <h1 className="h3 text-white">Simula tu crédito aquí</h1>
+    </section>
     <Form style={{width:400}}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label className="colorValue">Cuota: ${cuota.toLocaleString()}</Form.Label>
@@ -89,7 +93,7 @@ const SimulaCredito = ({ cuotaInitial, pieInitial, tasa, cuotaMin, cuotaMax, pie
         onChange={(e) => handleInputChange(e, setPie)}        
       />
       <p className="colorValue">% de Pie: {porcentajeRedondeado}%</p>
-      <p className="colorValue">{alert}</p>
+      <small><p className="text-danger fst-italic">{alert}</p></small>
       <Form.Select
         value={plazo}
         onChange={handlePlazoChange}
@@ -99,14 +103,15 @@ const SimulaCredito = ({ cuotaInitial, pieInitial, tasa, cuotaMin, cuotaMax, pie
           <option value={36}>36</option>
           <option value={48}>48</option>
       </Form.Select>  
-      <p className="colorValue">Valor final calculado: {ValorFinalFormateado}</p>    
+      <p className="colorValue mt-3">Monto Total: {ValorFinalFormateado}</p>    
       <Button
       className="w-100"
       variant="primary"
       size="lg"
       disabled={alert}
-      >Button</Button>  
+      >Buscar</Button>  
     </Form>
+  </>  
   );
 };
 
